@@ -23,4 +23,4 @@ implicit val dateTimeRW: RootJsonFormat[DateTime] = new RootJsonFormat[DateTime]
 }
 implicit val newTypeFormat: RootJsonFormat[NewTypes] = jsonFormat1(NewTypes)
 val stringNT = newTypes.toJson.toString
-stringNT.parseJson.convertTo[NewTypes] // TODO This throw exception atm. why??
+stringNT.parseJson.convertTo[NewTypes]
