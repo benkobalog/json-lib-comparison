@@ -23,3 +23,23 @@ implicit val newTypesFormat: ReadWriter[NewTypes] = macroRW
 val stringNT = write(newTypes)
 read[NewTypes](stringNT)
 
+// ADTs
+implicit val adtFormat: ReadWriter[ADT] = macroRW
+implicit val p0Format: ReadWriter[Product0.type] = macroRW
+implicit val p1Format: ReadWriter[Product1] = macroRW
+val stringADT = write(adts)
+// stringADT: String = [{"$type":"test.Main.Product0"},{"$type":"test.Main.Product1","x":243}]
+read[List[ADT]](stringADT)
+
+
+// Recursive data types
+implicit val recFormat: ReadWriter[Recur] = macroRW
+val stringRec = write(rec1)
+read[Recur](stringRec)
+
+// Multilevel classes
+implicit val lvl1Format: ReadWriter[Lvl1] = macroRW
+implicit val lvl2Format: ReadWriter[Lvl2] = macroRW
+implicit val lvl3Format: ReadWriter[Lvl3] = macroRW
+val stringLvl = write(lvl1)
+read[Lvl1](stringLvl)

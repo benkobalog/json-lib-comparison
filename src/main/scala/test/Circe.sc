@@ -24,3 +24,16 @@ implicit val dateTimeDecoder: Decoder[DateTime] =
     .emap(str => Try(new DateTime(str)).toEither.left.map(_.getMessage))
 val stringNT = newTypes.asJson.noSpaces
 decode[NewTypes](stringNT)
+
+// ADTs
+val stringADT = adts.asJson.noSpaces
+// stringADT: String = [{"Product0":{}},{"Product1":{"x":243}}]
+decode[List[ADT]](stringADT)
+
+// Recursive data types
+val stringRec = rec1.asJson.noSpaces
+decode[Recur](stringRec)
+
+// Multilevel classes
+val stringLvl = lvl1.asJson.noSpaces
+decode[Lvl1](stringLvl)

@@ -3,6 +3,8 @@ package test
 
 import org.joda.time.DateTime
 
+import scala.collection.immutable
+
 
 object Main {
 
@@ -40,4 +42,17 @@ object Main {
 
   case class NewTypes(dateTime1: DateTime)
   val newTypes = NewTypes(DateTime.now())
+
+  sealed trait ADT
+  case class Product1(x: Int) extends ADT
+  case object Product0 extends ADT
+  val adts: List[ADT] = List(Product0, Product1(243))
+
+  case class Recur(value: String, recurs: List[Recur])
+  val rec1 = Recur("lvl1", List(Recur("lvl2", Nil)))
+
+  case class Lvl3(x: Int)
+  case class Lvl2(x: Int, lvl3: Lvl3)
+  case class Lvl1(x: String, lvl2: Lvl2)
+  val lvl1 = Lvl1("root", Lvl2(2, Lvl3(333)))
 }
